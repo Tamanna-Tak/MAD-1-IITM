@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/searchdash.css"/>
+    <title>venue place search</title>
+</head>
+<body>
+    <nav>
+        <div class="logo">Ticket</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/searching">Searching Page</a></li>
+            
+        </ul>
+      </nav>
+      <br><br><br><br><br>
+    <form method="post" action="/venue_place_search">
+        <br>
+        <input style="font-size: large;" type="search" placeholder="search venue place" name='venue_place' type="text" required/>
+        <input style="font-size: large; background-color: blue; color: white;" type="submit" value="search"> 
+    </form>
+    <br>
+     <table>
+        <tr>
+            <th>Sr.No </th>
+            <th>Venue Name </th>
+            <th>Venue Place </th>
+            <th>Venue Capacity</th>
+            
+        </tr>
+   
+        {% for venue in venue_list %}
+        <tr>
+            <td>{{loop.index}}</td><!--serial no.-->
+            <td>{{venue['venue_name']}}</td>   
+            <td>{{venue['venue_place']}}</td>   
+            <td>{{venue['venue_capacity']}}</td>
+        
+        </tr>
+        {% endfor%}
+    </table>
+
+</body>
+</html>

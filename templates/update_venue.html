@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update venue</title>
+
+    <style> 
+
+        *{
+            
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        nav{
+        height: 80px;
+        width: 100%;
+        background: maroon;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 50px 0px 30px;
+        position: fixed;
+        /* left:0;
+        top:0;
+        z-index: 100%;  */
+      }
+        nav ul{
+            display: flex;
+            list-style: none;/*to remove bulletein*/
+        }
+        nav ul li{
+            margin: 0px 10px;
+        }
+        nav ul li a{
+            color: ghostwhite;
+            text-decoration: none;/*to remove underline*/
+            font-size: 19px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 8px 10px;
+            
+            border-radius: 5px;/*curve the corner*/
+            
+        }
+        nav ul li a:hover,
+        nav ul li a.active{
+            background-color: wheat;/*when hover */
+            color: black;
+        }
+    
+        nav .logo{
+            font-size: 35px;
+            color: white;
+            font-weight: 600;
+        }
+    
+        </style>
+
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Ticket</div>
+        <ul>
+            <li><a  href="/">Home</a></li>
+            <li><a href='/'>LOGOUT</a></li>
+            <li><a href="/admindash">Admin Dashboard</a></li> 
+        </ul>
+      </nav>
+      <br><br><br><br><br>
+
+    <h1>Update a Venue</h1>
+	<!-- <form method="post" action="/venue/create"> --> 
+    <form method="post" action="/venue/{{ven.venue_id}}/update">  <!--method='post':because we need method send post request first not get -->
+        <!--action takes an url on which the request is send i.e pos request is send to this url -->
+        <label>Enter the Venue name:</label>
+        <input name='v_name' type="text" value={{ven.venue_name}} required/> <!--required means this field can't be empty-->
+        <br><br>
+
+        <label>Enter the Venue Place:</label>
+        <input name='v_place' type="text" value={{ven.venue_place}} required/>
+        <br><br>
+
+        <label>Enter the Venue Capacity:</label>
+        <input name='v_capacity' type="text" value={{ven.venue_capacity}} required/>
+        <br><br>
+
+        <br><br>
+          
+        <label >Select a Show</label>
+        <select name="s_id"><!--dropdown text-->
+            {% for one in ssh %}
+                 <option value="{{one['show_id']}}">{{one['show_name']}}</option>
+                 <!--when we select any company name , it pass the primary key attribute(company_id)-->
+
+            {% endfor %}
+        </select><br><br>
+
+        <input type="submit" value="Update Venue"/>
+    </form>
+
+
+</body>
+</html>

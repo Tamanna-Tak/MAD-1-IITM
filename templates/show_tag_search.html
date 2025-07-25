@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/searchdash.css"/>
+    <title>Show tag search</title>
+</head>
+<body>
+    <nav>
+        <div class="logo">Ticket</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/searching">Searching Page</a></li>
+            
+        </ul>
+      </nav>
+      <br><br><br><br><br>
+    <form method="post" action="/show_tag_search">
+        <br> <br>
+        <input style="font-size: large;" type="search" placeholder="search show tag" name='show_tag' type="text" required/>
+        <input style="font-size: large; background-color: blue; color: white;" type="submit" value="search"> 
+    </form>
+    <br>
+
+    <table>
+        <tr>
+            <th>Sr.No </th>
+            <th>Show Name </th>
+            <th>Show Rating </th>
+            <th>Show Tag</th>
+            <th>Show Price</th>
+            
+        </tr>
+   
+        {% for show in show_list %}
+        <tr>
+            <td>{{loop.index}}</td><!--serial no.-->
+            <td>{{show['show_name']}}</td>   
+            <td>{{show['show_rating']}}</td>   
+            <td>{{show['show_tag']}}</td>  
+            <td>{{show['show_price']}}</td>  
+
+            
+            
+        
+        </tr>
+        {% endfor%}
+    </table>

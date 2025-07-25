@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue_details</title>
+    <br>
+    <style> 
+
+        *{
+            
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        nav{
+        height: 80px;
+        width: 100%;
+        background: maroon;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 50px 0px 30px;
+        position: fixed;
+        /* left:0;
+        top:0;
+        z-index: 100%;  */
+      }
+        nav ul{
+            display: flex;
+            list-style: none;/*to remove bulletein*/
+        }
+        nav ul li{
+            margin: 0px 10px;
+        }
+        nav ul li a{
+            color: ghostwhite;
+            text-decoration: none;/*to remove underline*/
+            font-size: 19px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 8px 10px;
+            
+            border-radius: 5px;/*curve the corner*/
+            
+        }
+        nav ul li a:hover,
+        nav ul li a.active{
+            background-color: wheat;/*when hover */
+            color: black;
+        }
+    
+        nav .logo{
+            font-size: 35px;
+            color: white;
+            font-weight: 600;
+        }
+        table, th, td {
+    border: 1px solid;
+    font-size: larger;
+  }
+    
+        </style>
+
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Ticket</div>
+        <ul>
+            <li><a  href="/">Home</a></li>
+            <li><a href='/'>LOGOUT</a></li>
+            <li><a href="/admindash">Admin Dashboard</a></li> 
+        </ul>
+      </nav>
+      <br><br><br><br><br>
+
+    <h1>Venue Details Page</h1>
+    <h3>Venue Name:{{ven.venue_name}}</h3>
+    <h3>Venue Place:{{ven.venue_place}}</h3>
+    <h3>Venue Capacity:{{ven.venue_capacity}}</h3>
+    
+
+    <h1>List of Shows</h1>
+    <!--jinja 2 conditional block-->
+    {% if show_list | length==0 %}
+        <p>No Show Available!!</p>
+
+    {% else %}<!--else part-->
+        <table>
+            <tr>
+                <th>Sr.No </th>
+                <th>Show Name </th>
+                <th>Show Rating </th>
+                <th>Show Tag</th>
+                <th>Show Price</th>
+                <th>Action</th>
+            </tr>
+       
+            {% for show in show_list %}
+            <tr>
+                <td>{{loop.index}}</td><!--serial no.-->
+                <td>{{show['show_name']}}</td>   
+                <td>{{show['show_rating']}}</td>   
+                <td>{{show['show_tag']}}</td>  
+                <td>{{show['show_price']}}</td>     
+                <td><a href="/show/{{show.show_id}}/update">Update</a></td>   
+                <td><a href="/show/{{show.show_id}}/venue/{{ven.venue_id}}">Remove</a></td>     <!--removing an employee from company, not a employee from the database ,i.e also need to remove entry from association table--> 
+            
+            </tr>
+            {% endfor%}
+        </table>
+    {% endif %}
+</body>
+</html>
